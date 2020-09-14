@@ -12,6 +12,7 @@
         <module>Generic</module>
         <module>Cigna</module>
         <module>ChaseBank</module>
+        <module>Jquery</module>
     </modules>
 
     <properties>
