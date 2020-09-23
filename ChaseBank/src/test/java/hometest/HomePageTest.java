@@ -10,9 +10,21 @@ public class HomePageTest extends WebAPI {
     public static void getInitElements(){
         homePage= PageFactory.initElements(driver,HomePage.class);
     }
-    @Test(priority = 1)
+   /* @Test(priority = 1)
     public void testOfMenuOptions(){
         getInitElements();
         homePage.testOfMenuOption();
+    }*/
+   /* @Test(priority = 2)
+    public void testFacebookTultip(){
+        getInitElements();
+        homePage.FaceBookTultip();
+        homePage.assertFB();
+    }*/
+    @Test(priority = 3)
+    public void testChaseIconImage(){
+        getInitElements();
+        homePage.chaseIcon();
     }
+
 }

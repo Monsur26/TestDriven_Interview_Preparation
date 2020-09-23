@@ -12,9 +12,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -29,6 +27,7 @@ import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -132,7 +131,7 @@ public class WebAPI {
             if (OS.equalsIgnoreCase("OS X")) {
                 System.setProperty("webdriver.chrome.driver", "../Generic/BrowserDriver/mac/chromedriver");
             } else if (OS.equalsIgnoreCase("Windows")) {
-                System.setProperty("webdriver.chrome.driver", "../Generic/BrowserDriver/windows/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "../Generic/BrowserDriver/windows/chromedriver2.exe");
             }
             driver = new ChromeDriver();
         } else if (browserName.equalsIgnoreCase("chrome-options")) {
@@ -141,7 +140,7 @@ public class WebAPI {
             if (OS.equalsIgnoreCase("OS X")) {
                 System.setProperty("webdriver.chrome.driver", "../Generic/BrowserDriver/mac/chromedriver");
             } else if (OS.equalsIgnoreCase("Windows")) {
-                System.setProperty("webdriver.chrome.driver", "../Generic/BrowserDriver/windows/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "../Generic/BrowserDriver/windows/chromedriver2.exe");
             }
             driver = new ChromeDriver(options);
         } else if (browserName.equalsIgnoreCase("firefox")) {
@@ -649,9 +648,17 @@ public class WebAPI {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
     }
-
+    public static void explicitWait(int sec){
+        WebDriverWait wait=new WebDriverWait(driver,sec);
+    }
     public static void implicitWait(int sec) {
         driver.manage().timeouts().implicitlyWait(sec, TimeUnit.SECONDS);
+    }
+    public static void fluentWait(){
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class);
     }
 
     public static void selectDropDownByIndex(WebElement element, int value) {
@@ -678,9 +685,13 @@ public class WebAPI {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
-    public static void dragAndDrop(WebElement To, WebElement from) {
+    public static void dragAndDropByElements(WebElement To, WebElement from) {
         Actions actions = new Actions(driver);
         actions.dragAndDrop(To, from).build().perform();
+    }
+    public static void dragAndDropByPixel(WebElement source, int xOffSet,int yOffSet){
+        Actions a=new Actions(driver);
+        a.dragAndDropBy(source,xOffSet,yOffSet).build().perform();
     }
 
 }
