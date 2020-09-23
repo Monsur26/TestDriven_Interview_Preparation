@@ -5,6 +5,8 @@ import home.HomePage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+
 public class HomePageTest extends WebAPI {
     static HomePage homePage;
     public static void initElements(){
@@ -40,10 +42,20 @@ public class HomePageTest extends WebAPI {
         initElements();
         homePage.headlessBrowser();
     }*/
-    @Test(priority = 6)
+   /* @Test(priority = 6)
     public void testAllOrBrokenLinks() {
         initElements();
         homePage.allOrBrokenLinks();
+    }*/
+    /*@Test(priority = 7)
+    public void testRobotClass() throws AWTException, InterruptedException {
+        initElements();
+        homePage.robotClass(); ;
+    }*/
+    @Test(priority = 8)
+    public void testRobotClassMouse() throws AWTException, InterruptedException {
+        initElements();
+        homePage.robotMouseEvent();
     }
 
 }

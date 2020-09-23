@@ -10,6 +10,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -123,5 +126,35 @@ public class HomePage extends WebAPI {
             e.printStackTrace();
         }
 
+
+    }
+    public void robotClass() throws AWTException, InterruptedException {
+        driver.get("https://spreadsheetpage.com/chart/sales/");
+        driver.findElement(By.xpath("//a[contains(text(),'Download this template for free')]")).click();
+        implicitWait(5);
+        Robot robot=new Robot();
+        robot.keyPress(KeyEvent.VK_DOWN);
+        Thread.sleep(5);
+        robot.keyPress(KeyEvent.VK_TAB);
+        Thread.sleep(5);
+        robot.keyPress(KeyEvent.VK_TAB);
+        Thread.sleep(5);
+        robot.keyPress(KeyEvent.VK_TAB);
+        Thread.sleep(5);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        Thread.sleep(5);
+    }
+    public void robotMouseEvent() throws AWTException, InterruptedException {
+        driver.get("http://dummy.restapiexample.com/");
+        Robot robot=new Robot();
+        robot.mouseMove(600,400);
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        Thread.sleep(2);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        Thread.sleep(2);
+        robot.keyPress(KeyEvent.VK_DOWN);
+        robot.keyPress(KeyEvent.VK_DOWN);
+        robot.keyPress(KeyEvent.VK_DOWN);
+        robot.keyPress(KeyEvent.VK_ENTER);
     }
 }
